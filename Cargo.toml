@@ -1,5 +1,6 @@
 [package]
-name = "one-d-proc-derive"
+name = "rxing-one-d-proc-derive"
+repository = "https://github.com/hschimke/rxing-one-d-proc-derive"
 version = "0.1.0"
 edition = "2021"
 
