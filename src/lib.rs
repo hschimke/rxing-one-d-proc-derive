@@ -70,7 +70,7 @@ fn impl_one_d_reader_macro(ast: &syn::DeriveInput) -> TokenStream {
                   
                   Ok(result)
                 } else {
-                  return Err(Exceptions::NotFoundException("".to_owned()))
+                  return Err(Exceptions::NotFoundException(None))
                 }
               }
             }
@@ -144,22 +144,22 @@ fn impl_one_d_writer_macro(ast: &syn::DeriveInput) -> TokenStream {
       ) -> Result<crate::common::BitMatrix, crate::Exceptions> {
           if contents.is_empty() {
               return Err(Exceptions::IllegalArgumentException(
-                  "Found empty contents".to_owned(),
+                  Some("Found empty contents".to_owned()),
               ));
           }
   
           if width < 0 || height < 0 {
-              return Err(Exceptions::IllegalArgumentException(format!(
+              return Err(Exceptions::IllegalArgumentException(Some(format!(
                   "Negative size is not allowed. Input: {}x{}",
                   width, height
-              )));
+              ))));
           }
           if let Some(supportedFormats) = self.getSupportedWriteFormats() {
               if !supportedFormats.contains(format) {
-                  return Err(Exceptions::IllegalArgumentException(format!(
+                  return Err(Exceptions::IllegalArgumentException(Some(format!(
                       "Can only encode {:?}, but got {:?}",
                       supportedFormats, format
-                  )));
+                  ))));
               }
           }
   
